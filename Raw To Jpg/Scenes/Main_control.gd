@@ -19,28 +19,28 @@ var output = []
 var svg = "res://icon.svg"
 #var result = OS.execute("python", [script_path])
 #var interprteter = DIR.pluss_file("Python-Files/RawToJpg/Scripts/python.exe")
-var script_path = DIR.path_join("Python-Files/RawToJpg/python_scripts/test.sh")
+var script_path = DIR.path_join("Python-Files/RawToJpg/python_scripts/test.py")
 # Called when the node enters the scene tree for the first time.
 func _enter_tree():
 	get_tree().get_root().borderless = true
 
 
 
-func t():
-	OS.execute("sh" ,["Python-Files/RawToJpg/python_scripts/test.sh"] )
-	
+func t(file):
+	OS.execute("python", ["show_notification", "Test","it Works Owo"])
+	var result = OS.execute("python",[script_path,"let_the_5AM_maddnes_come_out",file,"png"])
 	#var result = OS.execute("python", [script_path, "convert_cr3_to_image",folder,"png", "owo", "this should be a message"])
-	#if result == OK:
-	#	print("Script executed successfully!")
-	#else:
-	#	print("Script failed to execute.")
+	if result == OK:
+		print("Script executed successfully!")
+	else:
+		print("Script failed to execute.")
 	#print(result)
 
 func _ready():
 	get_tree().get_root().files_dropped.connect(_on_files_dropped)
 	#path = ProjectSettings.globalize_path("res://Python-Files/RawToJpg/python_scripts/")
-	#var result = OS.execute("python", [script_path, "show_notification", "owo", "this should be a message"])
-	t()
+	#var result = OS.execute("python", [script_path, "let_the_5AM_maddnes_come_out", "owo", "this should be a message"])
+	print("here")
 	
 func _on_files_dropped(files):
 	folder = files
@@ -58,7 +58,8 @@ func _on_minemise_button_down():
 
 func _on_start_convert_button_down():
 	print("convert")
-	t()
+	print(folder)
+	t(folder)
 
 func _on_bmp_toggled(button_pressed):
 	jpg.toggled = false
